@@ -1,0 +1,30 @@
+<div ng-include="'views/navigation/nav.html'"></div>
+<form ng-controller="PersonCtrl" ng-submit="addNew()" ng-init="getPlayer()">
+	<h2>Redigera spelare</h2>
+	<div class="input-group">
+		<label class="control-label" for="name" class="white-form__label icon-user"><span class="visuallyhidden">Namn</span></label>
+		<input class="form-control" id="name" type="text" placeholder="Namn" ng-model="person.name">
+	</div>
+	<div class="input-group">
+		<label for="position" class="white-form__label icon-user"><span class="visuallyhidden">Position</span></label>
+		<input class="form-control" id="position" type="text" placeholder="Position" ng-model="person.position">
+	</div>
+	<div class="input-group">
+		<label for="category" class="white-form__label icon-user"><span class="visuallyhidden">Lag</span></label>
+		<input class="form-control" id="team" type="text" laceholder="Lag" ng-model="person.team">
+	</div>
+	<div class="input-group">
+		<label><span class="visuallyhidden">Kategorier</span></label>
+		<ul class="list-inline">
+			<li ng-repeat="cat in categories"><span class="tag">{{cat.title}}</span></li>
+		</ul>
+	</div>
+	<div class="input-group">
+		<label for="status" class="white-form__label icon-user"><span class="visuallyhidden">Status</span></label>
+		<select ng-model="person.status" ng-options="s.title as s.title for s in statuses"></select>
+	</div>
+	<div class="input-group">
+		<label for="recruiter" class="white-form__label icon-user"><span class="visuallyhidden">Ansvarig</span></label>
+		<input class="form-control" id="recruiter" type="text" placeholder="Ansvarig" ng-model="person.recruiter">
+	</div>
+</form>
