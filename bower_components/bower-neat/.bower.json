@@ -1,0 +1,17 @@
+{
+  "name": "bower-neat",
+  "version": "1.4.0",
+  "main": "./_neat.scss",
+  "dependencies": {},
+  "homepage": "https://github.com/hmps/neat",
+  "_release": "1.4.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "1.4.0",
+    "commit": "330b01afb68956516532172c070852963f9aa836"
+  },
+  "_source": "git://github.com/hmps/neat.git",
+  "_target": "~1.4.0",
+  "_originalSource": "bower-neat",
+  "_direct": true
+}

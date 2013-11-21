@@ -1,0 +1,31 @@
+<div ng-include="'views/navigation/nav.html'"></div>
+<form ng-controller="PersonCtrl" ng-submit="addNew()">
+	<h2>Registrera spelare</h2>
+	<div class="input-group">
+		<label class="control-label" for="name" class="white-form__label icon-user"><span class="visuallyhidden">Namn</span></label>
+		<input class="form-control" id="name" type="text" name="name" placeholder="Namn" ng-model="person.name" class="white-form__text">
+	</div>
+	<div class="input-group">
+		<label class="control-label" for="position" class="white-form__label icon-user"><span class="visuallyhidden">Position</span></label>
+		<input class="form-control" id="position" type="text" position="position" placeholder="Position" ng-model="person.position" class="white-form__text">
+	</div>
+	<div class="input-group">
+		<label class="control-label" for="category" class="white-form__label icon-user"><span class="visuallyhidden">Lag</span></label>
+		<input class="form-control" id="team" type="text" team="team" placeholder="Lag" ng-model="person.team" class="white-form__text">
+	</div>
+	<div class="input-group">
+		<label class="control-label" for="category" class="white-form__label icon-user"><span class="visuallyhidden">Kategori</span></label>
+		<input class="form-control" id="category" type="text" category="category" placeholder="Kategori" ng-model="person.category" class="white-form__text">
+	</div>
+	<div class="input-group">
+		<label class="control-label" for="status" class="white-form__label icon-user"><span class="visuallyhidden">Status</span></label>
+		<input class="form-control" id="status" type="text" status="status" placeholder="Status" ng-model="person.status" class="white-form__text">
+	</div>
+	<div class="input-group">
+		<label class="control-label" for="recruiter" class="white-form__label icon-user"><span class="visuallyhidden">Ansvarig</span></label>
+		<input class="form-control" id="recruiter" type="text" recruiter="recruiter" placeholder="Ansvarig" ng-model="person.recruiter" class="white-form__text">
+	</div>
+	<button type="submit" class="btn btn-default" ng-click="registerPerson()">Registrera</button>
+	
+</form>
+<p ng-show="err" class="error">{{err}}</p>
