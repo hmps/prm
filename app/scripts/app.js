@@ -1,3 +1,10 @@
+//------------------------------------//
+//  STYLE.CSS
+//  Version: 0.1
+//  Author: Hampus Persson
+//  @hmps_se
+//------------------------------------//
+//
 'use strict';
 
 angular.module('prmApp', [
