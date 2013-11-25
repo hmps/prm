@@ -2,8 +2,8 @@
 <section class="main-content" role="main" ng-controller="PersonCtrl" ng-init="getPlayer()">
 	<header class="main-content__header">
 		<a href="#/" class="main-content__back"><i class="entypo-left-open"></i> Tillbaka</a>
-		<span class="main-content__stars"><i class="entypo-star"></i><i class="entypo-star"></i><i class="entypo-star"></i><i class="entypo-star"></i><i class="entypo-star"></i></span>
-		<h1 class="main-content__title-center">{{person.name}}<a href="#/players/{{id}}/edit" class="button-link"><i class="entypo-pencil main-content__edit"></i></a></h1>
+		<span class="main-content__stars" stars=""></span>
+		<h1 class="main-content__title-center">{{person.name}}<a href="#/person/{{id}}/edit" class="button-link"><i class="entypo-pencil main-content__edit"></i></a></h1>
 	</header>
 	<div class="person-details">
 		<img ng-src="{{person.image}}" class="person-details__image" alt="Profile picture for {{person.name}}">
@@ -21,7 +21,7 @@
 			<li>{{person.status || "-"}}</li>
 			<li>{{person.position || "-"}}</li>
 			<li>{{person.team}}</li>
-			<li><span ng-repeat="(key, val) in person.category" class="tag">{{key}}</span></li>
+			<li><span ng-repeat="(key, val) in person.category" class="tag">{{key}}</span>&nbsp;</li>
 			<li>{{person.age || "-"}}<i class="entypo-pencil person-details__edit"></i></li>
 			<li>{{person.height || "-"}}<i class="entypo-pencil person-details__edit"></i></li>
 			<li>{{person.weight || "-"}}<i class="entypo-pencil person-details__edit"></i></li>
@@ -35,7 +35,7 @@
 		</ul>
 		<ul class="person-details__list-left">
 			<li>{{person.recruiter}}</li>
-			<li>{{person.latest || "-"}}</li>
+			<li>{{person['updated_at'] | date:'yyyy-MM-dd HH:mm' || "-"}}</li>
 			<li>{{person.phone || "-"}}<i class="entypo-pencil person-details__edit"></i></li>
 			<li>{{person.mail || "-"}}<i class="entypo-pencil person-details__edit"></i></li>
 		</ul>
@@ -69,7 +69,7 @@
 			<form ng-submit="logThat()" ng-show="addEntry.active" class="activity-timeline__form">
 				<input type="hidden" ng-model="newEntry.source">
 				<textarea class="activity-timeline__textarea" cols="30" rows="10" ng-model="newEntry.text"></textarea>
-				<button class="activity-timeline__btn-cancel" ng-click="cancelEntry()">Avbryt</button>
+				<button class="activity-timeline__btn-cancel" type="reset" ng-click="cancelEntry()">Avbryt</button>
 				<button class="activity-timeline__btn" type="submit">Registrera</button>
 			</form>
 		</li>
@@ -77,7 +77,7 @@
 			<p>{{item.data}}</p>
 			<footer class="activity-timeline__footer">
 				<span>Hampus Persson: {{item.date | date:'yyyy-MM-dd HH:mm'}}</span>
-				<span><i ng-class="classes[item.source]"></i></span>
+				<span class="activity-timeline__icons"><i ng-class="classes[item.source]"></i></span>
 			</footer>
 		</li>
 	</ol>

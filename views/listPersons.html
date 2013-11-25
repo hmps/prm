@@ -23,12 +23,12 @@
 		</thead>
 		<tbody class="table__body">
 			<tr ng-repeat="(index, person) in persons | filter:search | orderBy:listOrder:reversed">
-				<td class="capitalize"><a href="#/players/{{person.$id}}">{{person.name}}</a></td>
+				<td class="capitalize"><a href="#/person/{{person.$id}}">{{person.name}}</a></td>
 				<td class="uppercase">{{person.position}}</td>
 				<td class="capitalize">{{person.team}}</td>
 				<td><span ng-repeat="(key, val) in person.category" class="tag" ng-click="updateSearch(key);">{{key}}</span></td>
 				<td class="capitalize">{{person.status}}</td>
-				<td class="capitalize"><i class="entypo-star"></i><i class="entypo-star"></i><i class="entypo-star"></i><i class="entypo-star"></i><i class="entypo-star"></i></td>
+				<td class="capitalize" stars=""></td>
 				<td class="uppercase">{{person.recruiter || '-'}}</td>
 				<td>{{person.updated_at | date:'yyyy-MM-dd HH:mm'}}</td>
 			</tr>

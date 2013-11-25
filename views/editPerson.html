@@ -1,23 +1,30 @@
 <div ng-include="'views/header.html'"></div>
 <section class="main-content" role="main" ng-controller="PersonCtrl" ng-init="getPlayer()">
 	<header class="main-content__header">
-		<a href="#/" class="main-content__back"><i class="entypo-left-open"></i> Tillbaka</a>
+		<a href="#/person/{{id}}" class="main-content__back"><i class="entypo-left-open"></i> Tillbaka</a>
 		<h1 class="main-content__title-center">Redigera - {{person.name}}</h1>
 	</header>
 	<form class="edit-person" ng-submit="addNew()">
 		<dl>
+			<dt class="edit-person__prop">Typ</dt>
+			<dd class="edit-person__val">
+				<select ng-model="person.type">
+					<option value="player">Player</option>
+					<option value="coach">Coach</option>
+				</select>
+			</dd>
 			<dt class="edit-person__prop">Namn</dt>
 			<dd class="edit-person__val"><input type="text" class="edit-person__text" ng-model="person.name"></dd>
 			<dt class="edit-person__prop">Profilbild</dt>
 			<dd class="edit-person__val"><input type="text" class="edit-person__text" ng-model="person.image"></dd>
 			<dt class="edit-person__prop">Rank</dt>
 			<dd class="edit-person__val">
-				<select ng-model="person.status">
-					<option value="1">1</option>
+				<select ng-model="person.rank">
+					<option value="1">1 (Sämst)</option>
 					<option value="2">2</option>
 					<option value="3">3</option>
 					<option value="4">4</option>
-					<option value="5">5</option>
+					<option value="5">5 (Bäst)</option>
 				</select>
 			</dd>
 			<dt class="edit-person__prop">Position</dt>
