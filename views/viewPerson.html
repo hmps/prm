@@ -1,37 +1,84 @@
-<div ng-include="'views/navigation/nav.html'"></div>
-<section ng-controller="PersonCtrl" ng-init="getPlayer()">
-	<h2>{{person.name}}</h2>
-	<div class="focus">
-		<img ng-src="{{person.image}}" class="media-object__img" alt="Profile picture for {{person.name}}">
-		<div class="media-object__body">
-			<dl class="dl-horizontal">
-				<dt>Position</dt>
-				<dd class="uppercase">{{person.position}}</dd>
-				<dt>Lag</dt>
-				<dd class="capitalize">{{person.team}}</dd>
-				<dt>Kategori</dt>
-				<dd><span ng-repeat="cat in person.category" class="tag" ng-click="updateSearch(cat.title);">{{cat.title}}</span></dd>
-				<dt>Status</dt>
-				<dd class="capitalize">{{person.status}}</dd>
-				<dt>Ansvarig</dt>
-				<dd class="uppercase">{{person.recruiter}}</dd>
-			</dl>
-			<a href="#/players/{{person.id}}/edit" class="btn btn-default">Redigera {{person.name}}</a>
-		</div>
+<div ng-include="'views/header.html'"></div>
+<section class="main-content" role="main" ng-controller="PersonCtrl" ng-init="getPlayer()">
+	<header class="main-content__header">
+		<a href="#/" class="main-content__back"><i class="entypo-left-open"></i> Tillbaka</a>
+		<span class="main-content__stars"><i class="entypo-star"></i><i class="entypo-star"></i><i class="entypo-star"></i><i class="entypo-star"></i><i class="entypo-star"></i></span>
+		<h1 class="main-content__title-center">{{person.name}}<a href="#/players/{{id}}/edit" class="button-link"><i class="entypo-pencil main-content__edit"></i></a></h1>
+	</header>
+	<div class="person-details">
+		<img ng-src="{{person.image}}" class="person-details__image" alt="Profile picture for {{person.name}}">
+		<ul class="person-details__list">
+			<li>Status</li>
+			<li>Position</li>
+			<li>Lag</li>
+			<li>Taggar</li>
+			<li>Ålder</li>
+			<li>Längd</li>
+			<li>Vikt</li>
+			<li>Moderklubb</li>
+		</ul>
+		<ul class="person-details__list-left">
+			<li>{{person.status || "-"}}</li>
+			<li>{{person.position || "-"}}</li>
+			<li>{{person.team}}</li>
+			<li><span ng-repeat="(key, val) in person.category" class="tag">{{key}}</span></li>
+			<li>{{person.age || "-"}}<i class="entypo-pencil person-details__edit"></i></li>
+			<li>{{person.height || "-"}}<i class="entypo-pencil person-details__edit"></i></li>
+			<li>{{person.weight || "-"}}<i class="entypo-pencil person-details__edit"></i></li>
+			<li>{{person.motherclub || "-"}}<i class="entypo-pencil person-details__edit"></i></li>
+		</ul>
+		<ul class="person-details__list">
+			<li>Ansvarig</li>
+			<li>Senaste aktivitet</li>
+			<li>Telefon</li>
+			<li>Mail</li>
+		</ul>
+		<ul class="person-details__list-left">
+			<li>{{person.recruiter}}</li>
+			<li>{{person.latest || "-"}}</li>
+			<li>{{person.phone || "-"}}<i class="entypo-pencil person-details__edit"></i></li>
+			<li>{{person.mail || "-"}}<i class="entypo-pencil person-details__edit"></i></li>
+		</ul>
+		<ul class="person-details__list">
+			<li>Bänkpress</li>
+			<li>Knäböj</li>
+			<li>Frivändning</li>
+			<li>Pro shuttle</li>
+			<li>L-drill</li>
+			<li>40 yards</li>
+		</ul>
+		<ul class="person-details__list-left">
+			<li>{{person.gym.bench || "-"}}<i class="entypo-pencil person-details__edit"></i></li>
+			<li>{{person.gym.squat || "-"}}<i class="entypo-pencil person-details__edit"></i></li>
+			<li>{{person.gym.clean || "-"}}<i class="entypo-pencil person-details__edit"></i></li>
+			<li>{{person.gym.shuttle || "-"}}<i class="entypo-pencil person-details__edit"></i></li>
+			<li>{{person.gym.lDrill || "-"}}<i class="entypo-pencil person-details__edit"></i></li>
+			<li>{{person.gym.forty || "-"}}<i class="entypo-pencil person-details__edit"></i></li>
+		</ul>
 	</div>
-	<div class="clearfix">
-		<h1>Aktivitet</h1>
-		<a href="" class="btn btn-default pull-right clearfix" ng-click="addLogEntry=!addLogEntry">+ Skapa logginlägg</a>
-	</div>
-	<div class="clearfix" ng-show="addLogEntry">
-		<textarea class="form-control" ng-model="tempLog" cols="25" rows="10"></textarea>
-		<a class="btn pull-right" ng-click="logThat(); addLogEntry=false;">+ Log that</a>
-	</div>
-	<ul>
-		<li ng-repeat="item in person.log | orderBy:'date':true">
-			<p>{{item.data}}</p>
-			<p>{{item.date | date:'yyyy-MM-dd HH:mm'}}</p>
+	<ol class="activity-timeline">
+		<li class="activity-timeline__item-add">
+			<nav>
+				<ul class="source-list">
+					<li class="source-list__item-mail" ng-click="setActiveSource('mail');" ng-class="{'active': addEntry.source.mail}"><i class="entypo-paper-plane"></i></li>
+					<li class="source-list__item-phone" ng-click="setActiveSource('phone');" ng-class="{'active': addEntry.source.phone}"><i class="entypo-phone"></i></li>
+					<li class="source-list__item-fb" ng-click="setActiveSource('fb');" ng-class="{'active': addEntry.source.fb}"><i class="entypo-facebook-squared"></i></li>
+					<li class="source-list__item-other" ng-click="setActiveSource('other');" ng-class="{'active': addEntry.source.other}"><i class="entypo-chat"></i></li>
+				</ul>
+			</nav>
+			<form ng-submit="logThat()" ng-show="addEntry.active" class="activity-timeline__form">
+				<input type="hidden" ng-model="newEntry.source">
+				<textarea class="activity-timeline__textarea" cols="30" rows="10" ng-model="newEntry.text"></textarea>
+				<button class="activity-timeline__btn-cancel" ng-click="cancelEntry()">Avbryt</button>
+				<button class="activity-timeline__btn" type="submit">Registrera</button>
+			</form>
 		</li>
-	</ul>
+		<li ng-repeat="item in person.log | orderBy:'date':true" class="activity-timeline__item">
+			<p>{{item.data}}</p>
+			<footer class="activity-timeline__footer">
+				<span>Hampus Persson: {{item.date | date:'yyyy-MM-dd HH:mm'}}</span>
+				<span><i ng-class="classes[item.source]"></i></span>
+			</footer>
+		</li>
+	</ol>
 </section>
-{{auth}}

@@ -1,30 +1,50 @@
-<div ng-include="'views/navigation/nav.html'"></div>
-<form ng-controller="PersonCtrl" ng-submit="addNew()" ng-init="getPlayer()">
-	<h2>Redigera spelare</h2>
-	<div class="input-group">
-		<label class="control-label" for="name" class="white-form__label icon-user"><span class="visuallyhidden">Namn</span></label>
-		<input class="form-control" id="name" type="text" placeholder="Namn" ng-model="person.name">
-	</div>
-	<div class="input-group">
-		<label for="position" class="white-form__label icon-user"><span class="visuallyhidden">Position</span></label>
-		<input class="form-control" id="position" type="text" placeholder="Position" ng-model="person.position">
-	</div>
-	<div class="input-group">
-		<label for="category" class="white-form__label icon-user"><span class="visuallyhidden">Lag</span></label>
-		<input class="form-control" id="team" type="text" laceholder="Lag" ng-model="person.team">
-	</div>
-	<div class="input-group">
-		<label><span class="visuallyhidden">Kategorier</span></label>
-		<ul class="list-inline">
-			<li ng-repeat="cat in categories"><span class="tag">{{cat.title}}</span></li>
-		</ul>
-	</div>
-	<div class="input-group">
-		<label for="status" class="white-form__label icon-user"><span class="visuallyhidden">Status</span></label>
-		<select ng-model="person.status" ng-options="s.title as s.title for s in statuses"></select>
-	</div>
-	<div class="input-group">
-		<label for="recruiter" class="white-form__label icon-user"><span class="visuallyhidden">Ansvarig</span></label>
-		<input class="form-control" id="recruiter" type="text" placeholder="Ansvarig" ng-model="person.recruiter">
-	</div>
-</form>
+<div ng-include="'views/header.html'"></div>
+<section class="main-content" role="main" ng-controller="PersonCtrl" ng-init="getPlayer()">
+	<header class="main-content__header">
+		<a href="#/" class="main-content__back"><i class="entypo-left-open"></i> Tillbaka</a>
+		<h1 class="main-content__title-center">Redigera - {{person.name}}</h1>
+	</header>
+	<form class="edit-person" ng-submit="addNew()">
+		<dl>
+			<dt class="edit-person__prop">Namn</dt>
+			<dd class="edit-person__val"><input type="text" class="edit-person__text" ng-model="person.name"></dd>
+			<dt class="edit-person__prop">Profilbild</dt>
+			<dd class="edit-person__val"><input type="text" class="edit-person__text" ng-model="person.image"></dd>
+			<dt class="edit-person__prop">Rank</dt>
+			<dd class="edit-person__val">
+				<select ng-model="person.status">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+				</select>
+			</dd>
+			<dt class="edit-person__prop">Position</dt>
+			<dd class="edit-person__val"><input type="text" class="edit-person__text" ng-model="person.position"></dd>
+			<dt class="edit-person__prop">Lag</dt>
+			<dd class="edit-person__val"><input type="text" class="edit-person__text" ng-model="person.team"></dd>
+			<dt class="edit-person__prop">Taggar</dt>
+			<dd class="edit-person__val">
+				<input type="checkbox" ng-repeat-start="cat in categories" ng-model="person.category[cat.title]"><span ng-repeat-end="">{{cat.title}}</span>
+			</dd>
+			<dt class="edit-person__prop">Status</dt>
+			<dd class="edit-person__val"><select ng-model="person.status" ng-options="s.title as s.title for s in statuses"></select></dd>
+			<dt class="edit-person__prop">Ålder</dt>
+			<dd class="edit-person__val"><input type="text" class="edit-person__text" ng-model="person.age"></dd>
+			<dt class="edit-person__prop">Moderklubb</dt>
+			<dd class="edit-person__val"><input type="text" class="edit-person__text" ng-model="person.motherclub"></dd>
+			<dt class="edit-person__prop">Längd</dt>
+			<dd class="edit-person__val"><input type="text" class="edit-person__text" ng-model="person.height"></dd>
+			<dt class="edit-person__prop">Vikt</dt>
+			<dd class="edit-person__val"><input type="text" class="edit-person__text" ng-model="person.weight"></dd>
+			<dt class="edit-person__prop">Ansvarig</dt>
+			<dd class="edit-person__val"><input type="text" class="edit-person__text" ng-model="person.recruiter"></dd>
+			<dt class="edit-person__prop">Telefon</dt>
+			<dd class="edit-person__val"><input type="text" class="edit-person__text" ng-model="person.phone"></dd>
+			<dt class="edit-person__prop">Mail</dt>
+			<dd class="edit-person__val"><input type="text" class="edit-person__text" ng-model="person.mail"></dd>
+		</dl>
+		<button type="submit" ng-hide="id">Spara</button>
+	</form>
+</section>

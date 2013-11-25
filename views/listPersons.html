@@ -1,37 +1,34 @@
-<div ng-include="'views/navigation/nav.html'"></div>
-<a href="#/players/add" class="btn btn-default">+ Lägg till spelare</a>
-<section ng-controller="PersonCtrl">
+<div ng-include="'views/header.html'"></div>
+<section class="main-content" role="main" ng-controller="PersonCtrl">
+	<header class="main-content__header">
+		<h1 class="main-content__title">SPELARE</h1>
+	</header>
 	<div class="filter">
-		<label for="search-name">Namn</label>
-		<input id="search-name" type="text" ng-model="search.name">
-		<label for="search-cat">Kategori</label>
-		<input id="search-cat" type="text" ng-model="search.category">
-		<label for="search-pos">Position</label>
-		<select ng-model="search.position" ng-options="pos.title as pos.title for pos in positions | uppercase">
-			<option value="">Alla</option>
-		</select>
-		<label for="search-recruiter">Ansvarig</label>
-		<input id="search-recruiter" type="text" ng-model="search.recruiter">
+		<h2 class="filter__title">FILTER</h2>
+		<label for="" class="filter__label">Namn</label>
+		<input type="text" class="filter__text" ng-model="search.name">
 	</div>
-	<table class="table table-striped table-hover">
-		<thead>
+	<table class="table">
+		<thead class="table__header">
 			<tr>
-				<td ng-click="listOrder='name'; reversed=!reversed;">Namn</td>
+				<td ng-click="listOrder='name'; reversed=!reversed;">Namn <i class="entypo-down-open-mini"></i></td>
 				<td ng-click="listOrder='position'; reversed=!reversed;">Position</td>
 				<td ng-click="listOrder='team'; reversed=!reversed;">Lag</td>
-				<td>Kategori</td>
+				<td>Taggar</td>
 				<td ng-click="listOrder='status'; reversed=!reversed;">Status</td>
+				<td>Ranking</td>
 				<td ng-click="listOrder='recruiter'; reversed=!reversed;">Ansvarig</td>
 				<td ng-click="listOrder='date'; reversed=!reversed;">Senaste aktivitet</td>
 			</tr>
 		</thead>
-		<tbody>
+		<tbody class="table__body">
 			<tr ng-repeat="(index, person) in persons | filter:search | orderBy:listOrder:reversed">
 				<td class="capitalize"><a href="#/players/{{person.$id}}">{{person.name}}</a></td>
 				<td class="uppercase">{{person.position}}</td>
 				<td class="capitalize">{{person.team}}</td>
-				<td><span ng-repeat="cat in person.category" class="tag" ng-click="updateSearch(cat);">{{cat.title}}</span></td>
+				<td><span ng-repeat="(key, val) in person.category" class="tag" ng-click="updateSearch(key);">{{key}}</span></td>
 				<td class="capitalize">{{person.status}}</td>
+				<td class="capitalize"><i class="entypo-star"></i><i class="entypo-star"></i><i class="entypo-star"></i><i class="entypo-star"></i><i class="entypo-star"></i></td>
 				<td class="uppercase">{{person.recruiter || '-'}}</td>
 				<td>{{person.updated_at | date:'yyyy-MM-dd HH:mm'}}</td>
 			</tr>
